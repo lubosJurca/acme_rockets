@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const Header = () => {
   const hamburgeMenu = document.getElementById("hamburger-menu")
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
 
   const toggleMenu = ( ) => {
     setOpen(prevState => !prevState)
