@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
 
   const toggleMenu = () => {
     setOpen((prevState) => !prevState);
@@ -17,6 +28,18 @@ const Header = () => {
           {" "}
           <a href="#hero">🚀 Acme Rockets</a>
         </h1>
+        <button onClick={() => setDarkMode((prevState) => !prevState)} className="flex items-center font-medium">
+          {darkMode ? (
+            <p className="flex items-center text-yellow-200 gap-2">
+              <LightModeIcon /> 
+            </p>
+          ) : (
+            <p className="flex items-center text-zinc-700 gap-2">
+              <DarkModeIcon  />
+              
+            </p>
+          )}
+        </button>
         <div>
           <button
             id="hamburger-menu"
@@ -50,7 +73,6 @@ const Header = () => {
           open ? "flex" : "hidden"
         }`}
       >
-        
         <nav
           onClick={toggleMenu}
           className="flex flex-col min-h-screen items-center py-8 "
